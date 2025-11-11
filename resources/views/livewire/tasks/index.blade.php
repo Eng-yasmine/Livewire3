@@ -22,6 +22,14 @@
                     </th>
 
                     <th scope="col" class="px-6 py-3">
+                        Due Date
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Media
+                    </th>
+
+                    <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
@@ -42,6 +50,16 @@
                                 {{ $task->is_completed ? 'Completed' : 'In progress' }}
                             </span>
                         </td>
+                        <td class="px-6 py-4">
+                            {{ $task->due_date?->format('d/m/Y') }}
+                        </td>
+                        <td>
+                        @if($task->media_file)
+                        <a href="{{ $task->media_file->getUrl() }}" target="_blank">
+                            {{ $task->media_file->file_name }}
+                        </a>
+                    @endif
+                    </td>
                         <td class="px-6 py-4 space-x-2">
                             <flux:button href="{{ route('tasks.edit', $task) }}" variant="filled">{{ __('Edit') }}</flux:button>
                             <flux:button wire:confirm="Are you sure you want to delete this task?"
