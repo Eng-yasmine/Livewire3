@@ -1,0 +1,1 @@
+<img src="{{ asset('OIP.webp') }}" alt="Self Study" class="w-10 h-10">
