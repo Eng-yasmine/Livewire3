@@ -6,6 +6,7 @@ use App\Models\Task;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 use Livewire\WithFileUploads;
+use App\Models\TaskCategory;
 class Edit extends Component
 {
     use WithFileUploads;
@@ -40,6 +41,7 @@ class Edit extends Component
             'is_completed' =>$this->is_completed,
             'due_date' => $this->due_date,
         ]);
+        $this->task->taskCategories()->sync($this->selectedTaskCategories ?? []);
 
         if($this->media){
             $this->task->getFirstMedia()?->delete();
@@ -57,6 +59,10 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.tasks.edit');
+        return view('livewire.tasks.edit',
+    [
+        'taskCategories' => TaskCategory::all(),
+    ]
+    );
     }
 }

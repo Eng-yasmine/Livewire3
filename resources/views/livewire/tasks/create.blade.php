@@ -5,13 +5,20 @@
 
         <flux:input wire:model="due_date" :label="__('Due Date')" type="date" />
 
-
-        <flux:input wire:model="media" type="file" :label="__('Media')" />
-
-        <div>
-            <flux:button variant="primary" type="submit">
-                {{ __('Save') }}
-            </flux:button>
-        </div>
+        <flux:label>Categories</flux:label>
+        <ul>
+            @foreach($taskCategories as $taskCategory)
+                <li>
+                    <input wire:model="selectedTaskCategories" type="checkbox" value="{{ $taskCategory->id }}">
+                    <label>{{ $taskCategory->name }}</label>
+                </li>
+            @endforeach
+        </ul>   
+        
+    <div>
+    <flux:button variant="primary" type="submit">
+        {{ __('Save') }}
+    </flux:button>
+</div>
     </form>
 </section>
